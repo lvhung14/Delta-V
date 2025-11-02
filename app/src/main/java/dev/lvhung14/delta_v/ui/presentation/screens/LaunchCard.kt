@@ -1,16 +1,20 @@
-package dev.lvhung14.delta_v.ui.presentation.vm.screens
+package dev.lvhung14.delta_v.ui.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import dev.lvhung14.delta_v.R
-import kotlinx.coroutines.launch
 
 @Composable
 fun LaunchCard(
@@ -23,13 +27,20 @@ fun LaunchCard(
 ) {
     Row(modifier = modifier) {
         Image(
-            painter = painterResource(image), contentDescription = null
+            painter = painterResource(image), contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .weight(weight = 1f)
+                .fillMaxHeight()
         )
-        Column {
-            Text(name)
-            Text(desc)
-            Text(countDown)
-            Text(day)
+        Column(modifier = Modifier
+            .weight(weight = 2f)
+            .fillMaxHeight()
+            .padding(12.dp)) {
+            LaunchName(name)
+            LaunchDescription(desc)
+            LaunchCountDownTimer(countDown)
+            LaunchDay(day)
         }
     }
 }
@@ -40,17 +51,22 @@ fun LaunchName(launchName: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun LaunchDescription(launchDescription: String) {
+fun LaunchDescription(launchDescription: String, modifier: Modifier = Modifier) {
     Text(text = launchDescription, style = MaterialTheme.typography.bodyLarge)
 }
 
 @Composable
-fun LaunchCountDownTimer(time: String) {
+fun LaunchCountDownTimer(time: String, modifier: Modifier = Modifier) {
     Text(text = time)
 }
 
 @Composable
-fun BottomSheetContent() {
+fun LaunchDay(day: String, modifier: Modifier = Modifier) {
+    Text(text = day)
+}
+
+@Composable
+fun BottomSheetContent(modifier: Modifier = Modifier) {
     Row {
         Icon(
             painter = painterResource(R.drawable.ic_launcher_foreground),
@@ -61,4 +77,10 @@ fun BottomSheetContent() {
             contentDescription = null
         )
     }
+}
+
+@Composable
+@Preview
+fun LaunchCardPreview() {
+    LaunchCard(R.drawable.test_image, "Haha", "Hihi", "1111", "1111")
 }

@@ -2,14 +2,7 @@ package dev.lvhung14.delta_v.network.model
 
 import kotlinx.serialization.SerialName
 
-data class LaunchesResponse(
-    val count: Long,
-    val next: String?,
-    val previous: String?,
-    val results: List<Results>
-)
-
-data class Results(
+data class NetworkUpcomingLaunches(
     val id: String,
     val url: String,
     val name: String,
