@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dev.lvhung14.delta_v.database.UpcomingLaunchDatabase
+import dev.lvhung14.delta_v.database.DeltaVDatabase
 import javax.inject.Singleton
 
 @Module
@@ -16,12 +16,13 @@ internal object DatabaseModule {
 
     @Provides
     @Singleton
-    fun providesUpcomingLaunchDatabase(
+    fun providesDatabase(
         @ApplicationContext context: Context
-    ): UpcomingLaunchDatabase = Room.databaseBuilder(
+    ): DeltaVDatabase = Room.databaseBuilder(
         context,
-        UpcomingLaunchDatabase::class.java,
-        "upcoming-launch-database"
-    ).build()
-
+        DeltaVDatabase::class.java,
+        "delta-v.db"
+    )
+        .fallbackToDestructiveMigration()
+        .build()
 }

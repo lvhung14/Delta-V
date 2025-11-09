@@ -1,38 +1,30 @@
 package dev.lvhung14.delta_v.network.retrofit
 
 import dev.lvhung14.delta_v.network.DeltaVNetworkDataSource
-import dev.lvhung14.delta_v.network.model.NetworkUpcomingLaunches
-import kotlinx.serialization.Serializable
+import dev.lvhung14.delta_v.network.model.NetworkLaunch
+import dev.lvhung14.delta_v.network.model.NetworkLaunchResponse
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val BASE_URL = "https://ll.thespacedevs.com/2.3.0/"
-
-@Serializable
-private data class NetworkResponse<T> (
-    val data: T
-)
-
-private interface DeltaVApiService {
-    @GET("launches")
-    suspend fun getUpcomingLaunches(): NetworkResponse<List<NetworkUpcomingLaunches>>
+private interface LaunchLibraryApi {
+    @GET("launch/upcoming/")
+    suspend fun getUpcomingLaunches(
+        @Query("limit") limit: Int,
+        @Query("mode") mode: String = "detailed"
+    ): NetworkLaunchResponse
 }
 
 
 @Singleton
 internal class DeltaVRetrofitNetwork @Inject constructor(
-    gsonConverterFactory: GsonConverterFactory
-): DeltaVNetworkDataSource {
-    private val networkApi = Retrofit.Builder()
-        .addConverterFactory(gsonConverterFactory)
-        .baseUrl(BASE_URL)
-        .build()
-        .create(DeltaVApiService::class.java)
+    retrofit: Retrofit
+) : DeltaVNetworkDataSource {
+    private val networkApi = retrofit.create(LaunchLibraryApi::class.java)
 
-    override suspend fun getUpcomingLaunches(): List<NetworkUpcomingLaunches> {
-        return networkApi.getUpcomingLaunches().data
+    override suspend fun getUpcomingLaunches(limit: Int): List<NetworkLaunch> {
+        return networkApi.getUpcomingLaunches(limit = limit).results
     }
 }
