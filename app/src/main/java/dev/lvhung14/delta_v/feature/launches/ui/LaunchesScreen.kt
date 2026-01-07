@@ -204,24 +204,77 @@ private fun LaunchScreenPreview() {
     DeltaVTheme {
         LaunchesScreen(
             uiState = LaunchesUiState.Success(
-                launches = listOf(
-                    LaunchCardUiState(
-                        id = "1",
-                        title = "Falcon 9 | Starlink 9",
-                        provider = "SpaceX",
-                        location = "LC-39A • KSC • USA",
-                        launchWindow = "Sat, Nov 9 • 09:00 UTC",
-                        countdown = "T-2d 4h",
-                        status = "Go",
-                        missionSummary = "Deploying another batch of Starlink satellites.",
-                        imageUrl = null,
-                        detailUrl = null
-                    )
-                ),
+                launches = previewLaunches(),
                 isOffline = false,
                 lastUpdatedStatus = "Updated just now"
             ),
             onRefresh = {}
         )
     }
+}
+
+@Preview(name = "Loading")
+@Composable
+private fun LaunchesScreenLoadingPreview() {
+    DeltaVTheme {
+        LaunchesScreen(
+            uiState = LaunchesUiState.Loading,
+            onRefresh = {}
+        )
+    }
+}
+
+@Preview(name = "Error")
+@Composable
+private fun LaunchesScreenErrorPreview() {
+    DeltaVTheme {
+        LaunchesScreen(
+            uiState = LaunchesUiState.Error("Unable to load launches"),
+            onRefresh = {}
+        )
+    }
+}
+
+@Preview(name = "Offline")
+@Composable
+private fun LaunchesScreenOfflinePreview() {
+    DeltaVTheme {
+        LaunchesScreen(
+            uiState = LaunchesUiState.Success(
+                launches = previewLaunches(),
+                isOffline = true,
+                lastUpdatedStatus = "Updated 2 hours ago"
+            ),
+            onRefresh = {}
+        )
+    }
+}
+
+private fun previewLaunches(): List<LaunchCardUiState> {
+    return listOf(
+        LaunchCardUiState(
+            id = "1",
+            title = "Falcon 9 | Starlink 9",
+            provider = "SpaceX",
+            location = "LC-39A - KSC - USA",
+            launchWindow = "Sat, Nov 9 - 09:00 UTC",
+            countdown = "T-2d 4h",
+            status = "Go",
+            missionSummary = "Deploying another batch of Starlink satellites.",
+            imageUrl = null,
+            detailUrl = null
+        ),
+        LaunchCardUiState(
+            id = "2",
+            title = "Electron | Owl Night Long",
+            provider = "Rocket Lab",
+            location = "LC-1A - Mahia - New Zealand",
+            launchWindow = "Tue, Nov 12 - 01:00 UTC",
+            countdown = "T-5d 20h",
+            status = "TBD",
+            missionSummary = "Dedicated smallsat rideshare to low Earth orbit.",
+            imageUrl = null,
+            detailUrl = "https://example.com/mission"
+        )
+    )
 }
