@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Delta-V</string>
+    <string name="upcoming_launches">Upcoming launches</string>
+
+    <!-- Launches Screen -->
+    <string name="refresh_launches_content_description">Refresh launches</string>
+    <string name="offline_mode">Offline mode</string>
+    <string name="offline_message">You\'re seeing cached data. Tap refresh when you\'re back online.</string>
+    <string name="try_again">Try again</string>
+    <string name="retry">Retry</string>
+    <string name="unable_to_load_launches">Unable to load launches right now.</string>
+    <string name="no_cached_launches">No cached launches yet. Reconnect and try again.</string>
+    <string name="updated_prefix">Updated %s</string>
+    <string name="updated_just_now">Updated just now</string>
+
+    <!-- Launch Card -->
+    <string name="status_prefix">Status: %s</string>
+    <string name="mission_details">Mission details</string>
+    <string name="image_unavailable">Image unavailable</string>
+
+    <!-- Launch Data Defaults -->
+    <string name="launch_window_tbd">Launch window TBD</string>
+    <string name="location_tbd">Location TBD</string>
+    <string name="mission_summary_default">Mission details will be announced closer to launch.</string>
+    <string name="status_tbd">TBD</string>
+    <string name="upcoming_mission">Upcoming Mission</string>
+    <string name="launch_provider_tba">Launch provider TBA</string>
+    <string name="launch_time_tbd">Launch time TBD</string>
+    <string name="launched">Launched</string>
+
+    <!-- Time Formatting -->
+    <string name="just_now">just now</string>
+    <string name="minutes_ago">%dm ago</string>
+    <string name="hours_ago">%dh ago</string>
+    <string name="days_ago">%dd ago</string>
 </resources>
