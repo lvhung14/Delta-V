@@ -34,6 +34,30 @@ private val DarkColorScheme = darkColorScheme(
     surfaceTint = DarkPrimary
 )
 
+// Mars Theme - Deep space with orange accents (for Launch Calendar)
+private val MarsColorScheme = darkColorScheme(
+    primary = MarsOrange,
+    onPrimary = androidx.compose.ui.graphics.Color.White,
+    primaryContainer = CardDark,
+    onPrimaryContainer = SlateLight,
+    secondary = AccentNeon,
+    onSecondary = androidx.compose.ui.graphics.Color.White,
+    secondaryContainer = SurfaceDark,
+    onSecondaryContainer = SlateLight,
+    tertiary = MarsOrangeGlow,
+    onTertiary = androidx.compose.ui.graphics.Color.Black,
+    tertiaryContainer = CardDark,
+    onTertiaryContainer = SlateLight,
+    background = DeepSpaceBlack,
+    onBackground = androidx.compose.ui.graphics.Color.White,
+    surface = SurfaceDark,
+    onSurface = androidx.compose.ui.graphics.Color.White,
+    surfaceVariant = CardDark,
+    onSurfaceVariant = SlateMedium,
+    outline = SlateDark,
+    surfaceTint = MarsOrange
+)
+
 private val LightColorScheme = lightColorScheme(
     primary = LightPrimary,
     onPrimary = LightOnPrimary,
@@ -69,8 +93,8 @@ fun DeltaVTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-
-        darkTheme -> DarkColorScheme
+        // Use Mars theme when dynamic color is disabled (our custom theme)
+        darkTheme -> MarsColorScheme
         else -> LightColorScheme
     }
 
